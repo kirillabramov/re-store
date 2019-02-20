@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 
 const Header = ({ numItems, total }) => {
     return(
         <HeaderWrapper>
-            <Logo className="text-dark" href="#">ReStore</Logo>
-            <ShoppingCart>
+            <Logo className="text-dark" to="/">ReStore</Logo>
+            <ShoppingCart to="/cart">
                 <ShoppingCartIcon className="fa fa-shopping-cart" />
                 {numItems} items (${total})
             </ShoppingCart>
@@ -18,7 +18,7 @@ const Header = ({ numItems, total }) => {
 export default Header;
 
 
-const Logo = styled.a`
+const Logo = styled(Link)`
     font-family: 'Playfair Display' , sans-serif;
     font-size: 40px;
     &:hover{
@@ -34,7 +34,7 @@ const HeaderWrapper = styled.div`
     justify-content: space-between; 
 `;
 
-const ShoppingCart = styled.a`
+const ShoppingCart = styled(Link)`
     align-self: center;
     font-size: 18px;
 `;
