@@ -1,9 +1,40 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Wrapper } from '../app/app';
+import { bookDelete, 
+        bookAddedToCart, 
+        bookRemove } from '../../actions';
 
 
-const ShoppingCartTable = () => {
+
+const ShoppingCartTable = ({ items, total, onIncrease, onDecrease, onDelete}) => {
+
+    const renderRow = (item, idx) => {
+
+        const { id, title, count, total } = item;
+
+        return(
+            <TableTR key={ id }>
+                <TableTD>{ idx + 1 }</TableTD>
+                <TableTD>{ title }</TableTD>
+                <TableTD>{ count }</TableTD>
+                <TableTD>${ total }</TableTD>
+                <TableTD>
+                    <TableButton className="btn btn-outline-success btn-small" onClick={ () => onIncrease(id) }>
+                        <TableButtonIcon className="fa fa-plus-circle"></TableButtonIcon>
+                    </TableButton>
+                    <TableButton className="btn btn-outline-warning btn-small" onClick={ () => onDecrease(id) }>
+                        <TableButtonIcon className="fa fa-minus-circle"></TableButtonIcon>
+                    </TableButton>
+                    <TableButton className="btn btn-outline-danger btn-small" onClick={ () => onDelete(id) }>
+                        <TableButtonIcon className="fa fa-trash-o"></TableButtonIcon>
+                    </TableButton>
+                </TableTD>
+            </TableTR>
+        );
+    };
+
     return(
         <Wrapper>
             <TableTitle>Your order</TableTitle>
@@ -18,32 +49,28 @@ const ShoppingCartTable = () => {
                     </TableTR>
                 </TableHead>
                 <TableBody>
-                    <TableTR>
-                        <TableTD>1</TableTD>
-                        <TableTD>The fountainhead</TableTD>
-                        <TableTD>2</TableTD>
-                        <TableTD>$30</TableTD>
-                        <TableTD>
-                            <TableButton className="btn btn-outline-danger btn-small">
-                                <TableButtonIcon className="fa fa-trash-o"></TableButtonIcon>
-                            </TableButton>
-                            <TableButton className="btn btn-outline-success btn-small">
-                                <TableButtonIcon className="fa fa-plus-circle"></TableButtonIcon>
-                            </TableButton>
-                            <TableButton className="btn btn-outline-warning btn-small">
-                                <TableButtonIcon className="fa fa-minus-circle"></TableButtonIcon>
-                            </TableButton>
-                        </TableTD>
-                    </TableTR>
+                    { items.map(renderRow) }
                 </TableBody>
             </Table>
-            <TableTotal>Total: $201</TableTotal>
+            <TableTotal>Total: ${ total }</TableTotal>
         </Wrapper>
     )
 };
 
+const mapStateToProps = ({ shoppingCart: { cartItems, orderTotal }}) => {
+    return {
+        items: cartItems,
+        total: orderTotal
+    }
+};
+ 
+const mapDispatchToProps = {
+    onIncrease: bookAddedToCart,
+    onDecrease: bookRemove,
+    onDelete: bookDelete
+};
 
-export default ShoppingCartTable;
+export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCartTable);
 
 
 const TableTitle = styled.h2`

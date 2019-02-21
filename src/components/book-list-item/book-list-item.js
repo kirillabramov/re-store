@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const BookListItem = ({ book }) => {
+const BookListItem = ({ book, onAddedToCart }) => {
     const { title, author, price, imgLink } = book;
 
     return(
@@ -11,9 +11,11 @@ const BookListItem = ({ book }) => {
             </BookPicture>
             <BookDetails>
                 <BookTitle href="#">{title}</BookTitle>
-                <BookAuthor href="#">{author}</BookAuthor>
-                <BookPrice href="#"> {price}</BookPrice>
-                <BookButton className="btn btn-info">Add to cart</BookButton>
+                <BookAuthor>{author}</BookAuthor>
+                <BookPrice>${price}</BookPrice>
+                <BookButton 
+                    onClick={onAddedToCart}
+                    className="btn btn-info">Add to cart</BookButton>
             </BookDetails>
         </BookList>
     );
