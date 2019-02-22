@@ -8,7 +8,7 @@ const Header = ({ numItems, total }) => {
             <Logo className="text-dark" to="/">ReStore</Logo>
             <ShoppingCart to="/cart">
                 <ShoppingCartIcon className="fa fa-shopping-cart" />
-                {numItems} items (${total})
+                {numItems} {numItems === 1 ? 'item' : 'items'} (${total})
             </ShoppingCart>
         </HeaderWrapper>
     )
