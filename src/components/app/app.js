@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../header/header'; 
 import { connect } from 'react-redux';
@@ -25,6 +25,14 @@ class App extends Component {
               path="/cart/"
               component={ CartPage }
               />
+            <Route render={() => {
+                return(
+                    <PageNotFound>
+                        <PageNotFoundTitle>Page not found</PageNotFoundTitle>
+                        <HomeButton to="/re-store/">Home</HomeButton>
+                    </PageNotFound>
+                )
+                }} />
         </Switch>
 
       </Wrapper>
@@ -46,6 +54,35 @@ export const Wrapper = styled.div`
   max-width: 1040px;
   margin: 0 auto;
 `;
+
+const PageNotFound = styled(Wrapper)`
+  text-align: center
+`;
+const PageNotFoundTitle = styled.h2`
+  color: #000;
+  text-align: center;
+`;
+
+const HomeButton = styled(Link)`
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  color: #000;
+  transition: .25s ease;
+  &:hover{
+    color: #000;
+    text-decoration: none;
+    transform: scale(.95);
+    transition: .25s ease;
+  }
+  &:active{
+    transform: scale(.90);
+    transition: .25s ease;
+  }
+`;  
+
+
 
 
 
