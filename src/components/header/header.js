@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const Header = ({ numItems, total }) => {
     return(
         <HeaderWrapper>
-            <Logo className="text-dark" to="/">ReStore</Logo>
-            <ShoppingCart to="/cart">
+            <Logo className="text-dark" to="/re-store/">ReStore</Logo>
+            <ShoppingCart to="/cart/">
                 <ShoppingCartIcon className="fa fa-shopping-cart" />
                 {numItems} {numItems === 1 ? 'item' : 'items'} (${total})
             </ShoppingCart>

@@ -18,11 +18,11 @@ class App extends Component {
         <Header numItems={items} total={orderTotal}/>
         <Switch>
             <Route 
-              path="/"
+              path="/re-store/"
               component={ HomePage }
               exact/>
             <Route 
-              path="/cart"
+              path="/cart/"
               component={ CartPage }
               />
         </Switch>
